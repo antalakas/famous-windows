@@ -47,10 +47,11 @@ define(function(require, exports, module) {
 		});
 	
 		var contentSurface = new Surface({
-			content: "<br><br>Test (TM)",
+			content: "Test (TM)",
 			size: [undefined, undefined],
 			properties: {
-				color: myColor
+				color: '#8dCDC8',
+                backgroundColor: '#554A60'
 			}
 		});
 	
@@ -70,64 +71,10 @@ define(function(require, exports, module) {
 		  transform: Transform.translate(160, 0, 0)
 		});
 		
-		var leftSurface = new Surface({
-		  size: [80, 30],
-		  content: '<<',
-		  properties: {
-			color: 'white',
-			textAlign: 'center',
-			fontSize: '26px',
-			backgroundColor: '#FA5C4F'
-		  }
-		});
-		
-		leftSurface.on('click', function() {
-			var previousNode = this._pages.getPreviousItem();
-            if (previousNode != null) {
-                this.ShowPage(previousNode.nodeName);
-            }
-		}.bind(this));
-		
-		var rightSurface = new Surface({
-		  size: [80, 30],
-		  content: '>>',
-		  properties: {
-			color: 'white',
-			textAlign: 'center',
-			fontSize: '26px',
-			backgroundColor: '#404040'
-		  }
-		});
-
-		rightSurface.on('click', function() {
-			var nextNode = this._pages.getNextItem();
-            if (nextNode != null) {
-                this.ShowPage(nextNode.nodeName);
-            }
-		}.bind(this));	
-	
-		var closeSurface = new Surface({
-		  size: [30, 30],
-		  content: 'X',
-		  properties: {
-			color: 'white',
-			textAlign: 'center',
-			fontSize: '26px',
-			backgroundColor: '#FA5C4F'
-		  }
-		});
-
-		closeSurface.on('click', function() {
-		}.bind(this));	
-		
 		var node = containerSurface.add(downMod);
-		node.add(leftSurface);
-		node.add(rightMod).add(rightSurface);
-		node.add(rightMod2).add(closeSurface);
     }
 	
 	SwapperControllerView.prototype.RemovePage = function(name) {
-	
 		var index = this._pages.findIndexOfItem(name);
 		this._pages.remove(index);
     }

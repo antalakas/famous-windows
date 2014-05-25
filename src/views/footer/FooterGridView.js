@@ -6,6 +6,7 @@ define(function(require, exports, module) {
     var StateModifier   = require('famous/modifiers/StateModifier');
     var GridLayout      = require("famous/views/GridLayout");
     var ViewSequence       = require('famous/core/ViewSequence');
+    var HeaderFooter    = require('famous/views/HeaderFooterLayout');
 
     var ReservationView = require('views/footer/ReservationView');
     var SearchItineraryView = require('views/footer/SearchItineraryView');
@@ -14,7 +15,9 @@ define(function(require, exports, module) {
         View.apply(this, arguments);
 
         _createBacking.call(this);
+        _createLayout.call(this);
         _createGrid.call(this);
+        _createFooter.call(this);
 
         _setListeners.call(this);
     }
@@ -22,17 +25,31 @@ define(function(require, exports, module) {
     FooterGridView.prototype = Object.create(View.prototype);
     FooterGridView.prototype.constructor = FooterGridView;
 
-    FooterGridView.DEFAULT_OPTIONS = {};
+    FooterGridView.DEFAULT_OPTIONS = {
+        footerSize: 44
+    };
 
     function _createBacking() {
         var backing = new Surface({
             properties: {
-                backgroundColor: 'black',
+                backgroundColor: '#2B3332',
                 boxShadow: '0 0 20px rgba(0,0,0,0.5)'
             }
         });
 
         this.add(backing);
+    }
+
+    function _createLayout() {
+        this.layout = new HeaderFooter({
+            footerSize: this.options.footerSize
+        });
+
+        var layoutModifier = new StateModifier({
+            transform: Transform.translate(0, 0, 0.1)
+        });
+
+        this.add(layoutModifier).add(this.layout);
     }
 
     function _createGrid() {
@@ -56,7 +73,23 @@ define(function(require, exports, module) {
 
         viewSequence.push(this.searchItineraryView);
 
-        this.add(grid);
+        this.layout.content.add(grid);
+    }
+
+    function _createFooter() {
+        var backgroundSurface = new Surface({
+            content: "Test (TM)",
+            properties: {
+                color: '#74CDAB',
+                backgroundColor: '#2B3332'
+            }
+        });
+
+        var layoutModifier = new StateModifier({
+            transform: Transform.behind
+        });
+
+        this.layout.footer.add(layoutModifier).add(backgroundSurface);
     }
 
     // event bubbling

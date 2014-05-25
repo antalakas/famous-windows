@@ -13,6 +13,7 @@ define(function(require, exports, module) {
     function MenuView() {
         View.apply(this, arguments);
 
+        //_createBacking.call(this);
         _createStripViews.call(this);
         _createFeaturedView.call(this);
     }
@@ -34,6 +35,21 @@ define(function(require, exports, module) {
             curve: 'easeOut'
         }
     };
+
+    /*function _createBacking() {
+        var backing = new Surface({
+            properties: {
+                backgroundColor: '#2B3332',
+                boxShadow: '0 0 20px rgba(0,0,0,0.5)'
+            }
+        });
+
+        var backingModifier = new StateModifier({
+            transform: Transform.behind
+        });
+
+        this.add(backingModifier).add(this.backing);
+    }*/
 
     function _createStripViews() {
         this.stripModifiers = [];

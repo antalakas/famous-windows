@@ -12,8 +12,8 @@ define(function(require, exports, module) {
         View.apply(this, arguments);
 
         _createLayout.call(this);
-        _createHeader.call(this);
         _createBody.call(this);
+        _createHeader.call(this);
 
         _setListeners.call(this);
     }
@@ -53,12 +53,26 @@ define(function(require, exports, module) {
             size: [24, 24],
             content : 'img/menu-icons/rewind.png'
         });
-		
+
+        this.rewindSurface.on('click', function() {
+            var previousNode = this.bodySurface._pages.getPreviousItem();
+            if (previousNode != null) {
+                this.bodySurface.ShowPage(previousNode.nodeName);
+            }
+        }.bind(this));
+
 		this.forwardSurface = new ImageSurface({
             size: [24, 24],
             content : 'img/menu-icons/forward.png'
         });
-		
+
+        this.forwardSurface.on('click', function() {
+            var nextNode = this.bodySurface._pages.getNextItem();
+            if (nextNode != null) {
+                this.bodySurface.ShowPage(nextNode.nodeName);
+            }
+        }.bind(this));
+
 		this.removeSurface = new ImageSurface({
             size: [28, 28],
             content : 'img/menu-icons/remove.png'

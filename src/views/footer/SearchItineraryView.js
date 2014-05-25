@@ -21,8 +21,8 @@ define(function(require, exports, module) {
             content: "panel " + (2),
             size: [undefined, undefined],
             properties: {
-                backgroundColor: "hsl(" + (2 * 360 / 8) + ", 100%, 50%)",
-                color: "#404040",
+                backgroundColor: "#8DCDC8",
+                color: "#527472",
                 lineHeight: '200px',
                 textAlign: 'center'
             }
