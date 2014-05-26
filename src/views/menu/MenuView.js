@@ -7,8 +7,8 @@ define(function(require, exports, module) {
     var StateModifier = require('famous/modifiers/StateModifier');
     var Timer         = require('famous/utilities/Timer');
 
-    var StripView     = require('views/StripView');
-    var FeaturedView  = require('views/FeaturedView');
+    var StripView     = require('views/menu/StripView');
+    var FeaturedView  = require('views/menu/FeaturedView');
 
     function MenuView() {
         View.apply(this, arguments);

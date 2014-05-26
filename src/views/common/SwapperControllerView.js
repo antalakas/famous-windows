@@ -6,7 +6,7 @@ define(function(require, exports, module) {
     var StateModifier 	= require('famous/modifiers/StateModifier');
 	var EdgeSwapper   	= require('famous/views/EdgeSwapper');
 
-	var DoublyLinkedList = require('views/content/DoublyLinkedList');
+	var DoublyLinkedList = require('lib/DoublyLinkedList');
 	
     function SwapperControllerView() {
         View.apply(this, arguments);
@@ -15,17 +15,6 @@ define(function(require, exports, module) {
 		this._currentPage = '';
 		
 		_createEdgeSwapper.call(this);
-		
-		/*var list = new DoublyLinkedList();
-		list.add("red", "red");
-		list.add("orange");
-		list.add("yellow");
-
-		alert(list.item(1));   //"orange"
-
-		list.remove(1);
-
-		alert(list.item(1));   //"yellow"*/
     }
 
     SwapperControllerView.prototype = Object.create(View.prototype);
@@ -93,7 +82,7 @@ define(function(require, exports, module) {
 		}
     }
 	
-	SwapperControllerView.prototype.PrintPages = function(name) {
+	SwapperControllerView.prototype.PrintPages = function() {
 		console.log(this._pages);
     }
 	

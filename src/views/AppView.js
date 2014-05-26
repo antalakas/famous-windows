@@ -7,7 +7,7 @@ define(function(require, exports, module) {
     var Transitionable  = require('famous/transitions/Transitionable');
 
     var PageView      = require('views/PageView');
-    var MenuView      = require('views/MenuView');
+    var MenuView      = require('views/menu/MenuView');
     var StripData     = require('data/StripData');
 
     function AppView() {

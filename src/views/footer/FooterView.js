@@ -7,7 +7,7 @@ define(function(require, exports, module) {
     var Transitionable  = require('famous/transitions/Transitionable');
 
     var FooterGridView = require('views/footer/FooterGridView');
-    var MenuView      = require('views/MenuView');
+    var MenuView      = require('views/menu/MenuView');
     var StripData     = require('data/StripData');
 
     function FooterView() {

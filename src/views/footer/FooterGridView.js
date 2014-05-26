@@ -8,8 +8,8 @@ define(function(require, exports, module) {
     var ViewSequence       = require('famous/core/ViewSequence');
     var HeaderFooter    = require('famous/views/HeaderFooterLayout');
 
-    var ReservationView = require('views/footer/ReservationView');
-    var SearchItineraryView = require('views/footer/SearchItineraryView');
+    var ReservationView = require('views/footer/left/ReservationView');
+    var MultiView = require('views/footer/right/MultiView');
 
     function FooterGridView() {
         View.apply(this, arguments);
@@ -26,7 +26,7 @@ define(function(require, exports, module) {
     FooterGridView.prototype.constructor = FooterGridView;
 
     FooterGridView.DEFAULT_OPTIONS = {
-        footerSize: 44
+        footerSize: 22
     };
 
     function _createBacking() {
@@ -67,11 +67,11 @@ define(function(require, exports, module) {
 
         viewSequence.push(this.reservationView);
 
-        this.searchItineraryView = new SearchItineraryView({
+        this.multiView = new MultiView({
             size: [undefined, undefined]
         });
 
-        viewSequence.push(this.searchItineraryView);
+        viewSequence.push(this.multiView);
 
         this.layout.content.add(grid);
     }

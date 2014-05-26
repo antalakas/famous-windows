@@ -6,7 +6,7 @@ define(function(require, exports, module) {
     var HeaderFooter    = require('famous/views/HeaderFooterLayout');
     var ImageSurface    = require('famous/surfaces/ImageSurface');
 
-	var SwapperControllerView = require('views/SwapperControllerView');
+	var SwapperControllerView = require('views/common/SwapperControllerView');
     var FooterView = require('views/footer/FooterView');
 	
     function PageView() {
@@ -25,7 +25,7 @@ define(function(require, exports, module) {
     PageView.prototype.constructor = PageView;
 
     PageView.DEFAULT_OPTIONS = {
-        headerSize: 44,
+        headerSize: 32,
 		footerSize: 352
     };
 
@@ -61,13 +61,19 @@ define(function(require, exports, module) {
         });
 
         this.hamburgerSurface = new ImageSurface({
-            size: [44, 44],
-            content : 'img/hamburger.png'
+            size: [32, 32],
+            content : 'img/hamburger.png',
+            properties: {
+                cursor: 'pointer'
+            }
         });
 
 		this.rewindSurface = new ImageSurface({
-            size: [24, 24],
-            content : 'img/menu-icons/rewind.png'
+            size: [17, 17],
+            content : 'img/menu-icons/rewind.png',
+            properties: {
+                cursor: 'pointer'
+            }
         });
 
         this.rewindSurface.on('click', function() {
@@ -78,8 +84,11 @@ define(function(require, exports, module) {
         }.bind(this));
 
 		this.forwardSurface = new ImageSurface({
-            size: [24, 24],
-            content : 'img/menu-icons/forward.png'
+            size: [17, 17],
+            content : 'img/menu-icons/forward.png',
+            properties: {
+                cursor: 'pointer'
+            }
         });
 
         this.forwardSurface.on('click', function() {
@@ -90,8 +99,11 @@ define(function(require, exports, module) {
         }.bind(this));
 
 		this.removeSurface = new ImageSurface({
-            size: [28, 28],
-            content : 'img/menu-icons/remove.png'
+            size: [20, 20],
+            content : 'img/menu-icons/remove.png',
+            properties: {
+                cursor: 'pointer'
+            }
         });
 		
         //var searchSurface = new ImageSurface({
@@ -100,7 +112,7 @@ define(function(require, exports, module) {
         //});
 
         var iconSurface = new ImageSurface({
-            size: [44, 44],
+            size: [32, 32],
             content : 'img/waterline-logo.png'
         });
 
@@ -114,15 +126,15 @@ define(function(require, exports, module) {
         });
 
 		var rewindModifier = new StateModifier({
-            transform: Transform.translate(44, 10, 0)
+            transform: Transform.translate(44, 8, 0)
         });
 		
 		var forwardModifier = new StateModifier({
-			transform: Transform.translate(80, 10, 0)
+			transform: Transform.translate(80, 8, 0)
         });
 		
 		var removeModifier = new StateModifier({
-            transform: Transform.translate(110, 8, 0)
+            transform: Transform.translate(110, 6, 0)
         });
 
         var searchModifier = new StateModifier({
