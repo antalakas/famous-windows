@@ -6,7 +6,7 @@ define(function(require, exports, module) {
     var HeaderFooter    = require('famous/views/HeaderFooterLayout');
     var ImageSurface    = require('famous/surfaces/ImageSurface');
 
-	var SwapperControllerView = require('views/common/SwapperControllerView');
+    var MainView = require('views/content/MainView');
     var FooterView = require('views/footer/FooterView');
 	
     function PageView() {
@@ -43,7 +43,7 @@ define(function(require, exports, module) {
     function _createLayout() {
         this.layout = new HeaderFooter({
             headerSize: this.options.headerSize,
-			footerSize: this.options.footerSize
+            footerSize: this.options.footerSize
         });
 
         var layoutModifier = new StateModifier({
@@ -68,7 +68,7 @@ define(function(require, exports, module) {
             }
         });
 
-		this.rewindSurface = new ImageSurface({
+        this.rewindSurface = new ImageSurface({
             size: [17, 17],
             content : 'img/menu-icons/rewind.png',
             properties: {
@@ -77,13 +77,10 @@ define(function(require, exports, module) {
         });
 
         this.rewindSurface.on('click', function() {
-            var previousNode = this.bodySurface._pages.getPreviousItem();
-            if (previousNode != null) {
-                this.bodySurface.ShowPage(previousNode.nodeName);
-            }
+            this.bodySurface.ShowPreviousPage();
         }.bind(this));
 
-		this.forwardSurface = new ImageSurface({
+        this.forwardSurface = new ImageSurface({
             size: [17, 17],
             content : 'img/menu-icons/forward.png',
             properties: {
@@ -92,20 +89,17 @@ define(function(require, exports, module) {
         });
 
         this.forwardSurface.on('click', function() {
-            var nextNode = this.bodySurface._pages.getNextItem();
-            if (nextNode != null) {
-                this.bodySurface.ShowPage(nextNode.nodeName);
-            }
+            this.bodySurface.ShowNextPage();
         }.bind(this));
 
-		this.removeSurface = new ImageSurface({
+        this.removeSurface = new ImageSurface({
             size: [20, 20],
             content : 'img/menu-icons/remove.png',
             properties: {
                 cursor: 'pointer'
             }
         });
-		
+
         //var searchSurface = new ImageSurface({
         //    size: [232, 44],
         //    content : 'img/search.png'
@@ -125,15 +119,15 @@ define(function(require, exports, module) {
             align : [0, 0.5]
         });
 
-		var rewindModifier = new StateModifier({
+        var rewindModifier = new StateModifier({
             transform: Transform.translate(44, 8, 0)
         });
-		
-		var forwardModifier = new StateModifier({
-			transform: Transform.translate(80, 8, 0)
+
+        var forwardModifier = new StateModifier({
+            transform: Transform.translate(80, 8, 0)
         });
-		
-		var removeModifier = new StateModifier({
+
+        var removeModifier = new StateModifier({
             transform: Transform.translate(110, 6, 0)
         });
 
@@ -149,31 +143,22 @@ define(function(require, exports, module) {
 
         this.layout.header.add(backgroundModifier).add(backgroundSurface);
         this.layout.header.add(hamburgerModifier).add(this.hamburgerSurface);
-		this.layout.header.add(rewindModifier).add(this.rewindSurface);
-		this.layout.header.add(forwardModifier).add(this.forwardSurface);
-		this.layout.header.add(removeModifier).add(this.removeSurface);
+        this.layout.header.add(rewindModifier).add(this.rewindSurface);
+        this.layout.header.add(forwardModifier).add(this.forwardSurface);
+        this.layout.header.add(removeModifier).add(this.removeSurface);
         //this.layout.header.add(searchModifier).add(searchSurface);
         this.layout.header.add(iconModifier).add(iconSurface);
     }
 
     function _createBody() {
-	
-		this.bodySurface = new SwapperControllerView();
-		
-		this.bodySurface.AddPage('Alpha', 'red');
-		this.bodySurface.AddPage('Beta', 'green');
-		this.bodySurface.AddPage('Gamma', 'blue');
-		
-		this.layout.content.add(this.bodySurface);
-		
-		this.bodySurface.PrintPages();
-		
-		this.bodySurface.ShowPage('Beta');
-		
+
+        this.bodySurface = new MainView();
+        this.layout.content.add(this.bodySurface);
+
         //this.bodySurface = new Surface({
         //    size : [undefined, undefined],
         //    content : 'Test (TM)',
-		//	classes: ["page-style"]
+        //	classes: ["page-style"]
         //});
 
         //this.layout.content.add(this.bodySurface);
