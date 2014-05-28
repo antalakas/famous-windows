@@ -56,6 +56,7 @@ define(function(require, exports, module) {
 
     function _setListeners() {
         this.pageView.on('menuToggle', this.toggleMenu.bind(this));
+        this.menuView.on('stripMenu', this.toggleStripMenu.bind(this));
     }
 
     AppView.prototype.toggleMenu = function() {
@@ -66,6 +67,10 @@ define(function(require, exports, module) {
             this.menuView.animateStrips();
         }
     };
+
+    AppView.prototype.toggleStripMenu = function(title) {
+        this.pageView.StripMenuClicked(title);
+    }
 
     AppView.prototype.slideLeft = function() {
         this.pageViewPos.set(0, this.options.transition, function() {

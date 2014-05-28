@@ -44,7 +44,11 @@ define(function(require, exports, module) {
 			}
 		});
 	
-		containerSurface.add(contentSurface);
+        var backgroundModifier = new StateModifier({
+            transform : Transform.behind
+        });
+
+		containerSurface.add(backgroundModifier).add(contentSurface);
 		
 		this._pages.add(containerSurface, name);
 		

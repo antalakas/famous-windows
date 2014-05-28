@@ -9,7 +9,7 @@ define(function(require, exports, module) {
         View.apply(this, arguments);
 
         createBacking.call(this);
-        createNoteworthy.call(this);
+        //createNoteworthy.call(this);
         createStaffPicks.call(this);
     }
 
@@ -21,8 +21,8 @@ define(function(require, exports, module) {
 
     var createBacking = function() {
         var backSurface = new ImageSurface({
-            size: [320, 164],
-            content : './img/band.png',
+            size: [280, 120],
+            content : './img/wl_band.png',
             properties : {
                 pointerEvents : 'none'
             }
@@ -34,7 +34,7 @@ define(function(require, exports, module) {
     var createNoteworthy = function() {
         var surface = new Surface({
             size: [true, true],
-            content: 'Noteworthy',
+            content: 'My Product',
             properties: {
                 color: 'black',
                 fontSize: this.options.fontSize + 'px',
@@ -53,7 +53,7 @@ define(function(require, exports, module) {
     var createStaffPicks = function() {
         var surface = new Surface({
             size: [undefined, true],
-            content: 'Timbrus staff picks',
+            content: '',
             properties: {
                 color: 'white',
                 fontSize: this.options.fontSize + 'px',

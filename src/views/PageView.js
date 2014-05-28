@@ -5,6 +5,7 @@ define(function(require, exports, module) {
     var StateModifier   = require('famous/modifiers/StateModifier');
     var HeaderFooter    = require('famous/views/HeaderFooterLayout');
     var ImageSurface    = require('famous/surfaces/ImageSurface');
+    var Engine       = require('famous/core/Engine');
 
     var MainView = require('views/content/MainView');
     var FooterView = require('views/footer/FooterView');
@@ -54,7 +55,7 @@ define(function(require, exports, module) {
     }
 
     function _createHeader() {
-        var backgroundSurface = new Surface({
+        this.backgroundSurface = new Surface({
             properties: {
                 backgroundColor: '#534C46'
             }
@@ -141,7 +142,7 @@ define(function(require, exports, module) {
             align : [1, 0.5]
         });
 
-        this.layout.header.add(backgroundModifier).add(backgroundSurface);
+        this.layout.header.add(backgroundModifier).add(this.backgroundSurface);
         this.layout.header.add(hamburgerModifier).add(this.hamburgerSurface);
         this.layout.header.add(rewindModifier).add(this.rewindSurface);
         this.layout.header.add(forwardModifier).add(this.forwardSurface);
@@ -185,9 +186,34 @@ define(function(require, exports, module) {
         this.hamburgerSurface.on('click', function() {
             this._eventOutput.emit('menuToggle');
         }.bind(this));
+        /*
+        this.backgroundSurface.on('mouseup', function() {
+            this._eventOutput.emit('menuToggle');
+        }.bind(this));
+
+        this.backgroundSurface.on('mouseenter', function() {
+            this._eventOutput.emit('menuToggle');
+        }.bind(this));
+
+        this.backgroundSurface.on('mouseover', function() {
+            console.log('mouse over');
+        }.bind(this));
+
+        this.backgroundSurface.on('dragover', function() {
+            console.log('drag over over');
+        }.bind(this));*/
 
         this.bodySurface.pipe(this._eventOutput);
     }
+
+    PageView.prototype.StripMenuClicked = function(title) {
+        this.bodySurface.StripMenuClicked(title);
+    };
+
+    Engine.on('click', function(e) {
+        //console.log(e);
+        //console.log('mouse up');
+    });
 
     module.exports = PageView;
 });

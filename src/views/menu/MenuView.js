@@ -1,5 +1,3 @@
-/*** MenuView.js ***/
-
 define(function(require, exports, module) {
     var View          = require('famous/core/View');
     var Surface       = require('famous/core/Surface');
@@ -27,7 +25,7 @@ define(function(require, exports, module) {
         stripWidth: 320,
         stripHeight: 54,
         topOffset: 37,
-        stripOffset: 58,
+        stripOffset: 35,
         staggerDelay: 35,
         featureOffset: 380,
         transition: {
@@ -69,8 +67,18 @@ define(function(require, exports, module) {
             this.add(stripModifier).add(stripView);
 
             yOffset += this.options.stripOffset;
+
+            _setListener.call(this, stripView);
         }
     }
+
+    function _setListener(stripView) {
+        stripView.on('stripMenu', this.toggleStripMenu.bind(this, stripView));
+    }
+
+    MenuView.prototype.toggleStripMenu = function(stripView) {
+        this._eventOutput.emit('stripMenu', stripView.options.title);
+    };
 
     function _createFeaturedView() {
         var featuredView = new FeaturedView({ angle: this.options.angle });

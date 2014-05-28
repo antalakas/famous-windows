@@ -1,5 +1,3 @@
-/*** StripView.js ***/
-
 define(function(require, exports, module) {
     var View          = require('famous/core/View');
     var Surface       = require('famous/core/Surface');
@@ -20,12 +18,12 @@ define(function(require, exports, module) {
 
     StripView.DEFAULT_OPTIONS = {
         width: 320,
-        height: 55,
+        height: 35,
         angle: -0.11,
-        iconSize: 32,
+        iconSize: 25,
         iconUrl: 'img/strip-icons/famous.png',
         title: 'Famo.us',
-        fontSize: 26,
+        fontSize: 22,
     };
 
     function _createBackground() {
@@ -53,7 +51,10 @@ define(function(require, exports, module) {
         var iconSurface = new ImageSurface({
             size: [this.options.iconSize, this.options.iconSize],
             content : this.options.iconUrl,
-            pointerEvents : 'none'
+            pointerEvents : 'none',
+            properties: {
+                cursor: 'pointer'
+            }
         });
 
         var iconModifier = new StateModifier({
@@ -61,6 +62,10 @@ define(function(require, exports, module) {
         });
 
         this.add(iconModifier).add(iconSurface);
+
+        iconSurface.on('click', function() {
+            this._eventOutput.emit('stripMenu');
+        }.bind(this));
     }
 
     function _createTitle() {
